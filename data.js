@@ -1,12 +1,24 @@
 const roles = ["ทั้งหมด","โจมตี","สนับสนุน","ฟาร์ม"];
 const units = [
+ ["Toju (Sorcerer Killer)", 1, "Greatsword", "Inverted Spear", "เพิ่มดาเมจของตัวโจมตี Physical และยืดผล Bleed ด้วย Trait", ["Physical"]],
+ ["Bun (Immortal)", 1, "Greatsword", "Inverted Spear", "เน้นดาเมจเมื่อยืนตีต่อเนื่อง โดยเฉพาะบอสที่อยู่ในระยะนาน", ["Physical", "Tide"]],
+ ["Undead Knight (King)", 1, "Rapier", "Inverted Spear", "เมื่อเป้าหมายติดสถานะจะคริแน่นอน Rapier ช่วยให้โจมตีถี่และสะสมการลดคูลดาวน์จากคริได้เร็วขึ้น ส่วน Inverted Spear ให้เน้นโรล Crit Damage", ["Physical"]],
+ ["Kyruto (Dual Wielder)", 1, "Greatsword", "Inverted Spear", "เน้นดาเมจบอสและ Crit Damage เมื่อปลุก Dual Blades", ["Physical", "Dark"]],
+ ["Lao (Heart)", 1, "Sword", "เว้นช่องได้", "Sword เพิ่มดาเมจทั่วไป ทั้งตัวจำลองและ 32x ระบุ Magic แต่คู่มือบางแห่งระบุ Physical จึงเว้น Ultimate ที่จำกัดประเภทไว้ก่อน", ["Magic","Tide"]],
+ ["Zen (Unbound)", 1, "Greatsword", "Inverted Spear", "เสริมดาเมจกายภาพเมื่อโจมตีเป้าหมายที่มีโล่หรือต้านทาน", ["Physical"]],
+ ["Zero (True Emperor)", 2, "Slingshot", "เว้นช่องได้", "ใช้ระยะเพื่อให้หมากและออร่าถึงเพื่อน เว้น Relic ได้เมื่อจัดตำแหน่งครบ", ["Physical", "Light", "Buff"]],
+ ["Falcon (Wings of Light)", 2, "Slingshot", "เว้นช่องได้", "Slingshot ช่วยจัดวงให้ Berserk ได้ส่วนลดค่าอัปเกรด บัฟดาเมจทีมของ Falcon มีผลทั่วสนาม เว้นช่องได้ถ้าใช้เพื่อบัฟทีมหรือรับเงินต่อเวฟ", ["Magic", "Light", "Buff"]],
+ ["Jolin (Stone Fate)", 2, "Slingshot", "เว้นช่องได้", "เพิ่มพื้นที่ที่ศัตรูยังอยู่ในวง Bind และ Slow", ["Physical"]],
+ ["Jootaru (The World)", 2, "Slingshot", "เว้นช่องได้", "เลือกตามตำแหน่งวางเพื่อโจมตีและคุมเส้นทาง เก็บรีโรลได้เมื่อใช้เพื่อหยุดเวลา", ["Physical"]],
+ ["Ayzen (Perfect)", 2, "Slingshot", "Sacred Chalice of Fate", "Slingshot ขยายพื้นที่สตันตรงขอบวงและพื้นที่ของ Singularity ส่วน Sacred Chalice of Fate เสริมการโจมตี True เมื่อให้ Ayzen ช่วยทำดาเมจ", ["True"]],
+
  ["Mastermind",2,"Slingshot","เว้นช่องได้","The Puppeteer เพิ่มระยะให้ตัวเองและเพื่อนในวง 25% เลือก Slingshot เมื่อต้องการให้วงบัฟถึงเพื่อนที่ยืนไกล ช่อง Ultimate เว้นได้สำหรับบทบาทนี้",["Physical","Tempest","Buff"]],
  ["Music (Artist)",2,"Slingshot","เว้นช่องได้","เลือกเพลงเพิ่มระยะ เพิ่มคริติคอล หรือลดคูลดาวน์ให้เพื่อนในวง Slingshot มีประโยชน์เมื่อช่วยให้เพื่อนอีกตัวได้รับเพลง ส่วนช่อง Ultimate เว้นได้เมื่อใช้ Music บัฟทีม",["Magic","Buff"]],
- ["Goju VS Sukuno",1,["Staff","Slingshot"],"Arcane Staff","มีประเภท Magic จึงใช้คู่นี้ได้ Staff เพิ่มดาเมจเวทต่อครั้ง ส่วน Arcane Staff มีโอกาสใช้ท่าโจมตีซ้ำ เส้นทางพาสซีฟที่เลือกช่วยเพิ่มดาเมจ Magic หรือ Burn ให้เพื่อนในระยะ ถ้าวางเพื่อนให้เข้าออร่าได้ไม่ครบ ให้เพิ่มระยะด้วย Slingshot",["Physical", "Magic", "Buff"]],
+ ["Goju VS Sukuno",1,["Staff","Slingshot"],"Arcane Staff","มีประเภท Magic จึงใช้คู่นี้ได้ Staff เพิ่มดาเมจเวทต่อครั้ง ส่วน Arcane Staff มีโอกาสใช้ท่าโจมตีซ้ำ สาย Blessed ลงดีบัฟ Magic บนศัตรู ส่วนสาย Cursed บัฟ Burn ให้เพื่อนในระยะ ถ้าเล่นสาย Cursed แล้ววางเพื่อนสาย Burn เข้าออร่าได้ไม่ครบ ให้เพิ่มระยะด้วย Slingshot",["Physical", "Magic", "Buff"]],
  ["Einz (Sorcerer King)",1,"Staff","Arcane Staff","ร่าง Sorcerer King เป็น Magic / Dark เลือก Staff เพิ่มดาเมจเวท และ Arcane Staff สำหรับท่าโจมตีซ้ำ",["Magic", "Dark"]],
  ["Eskanoor",1,"Greatsword",["Great Axe Rhitta","Inverted Spear"],"สำหรับร่าง The One ที่มี Physical และ Blaze ใช้ Greatsword เพิ่มดาเมจต่อครั้ง ส่วนการโจมตี Blaze และ Burn ช่วยสะสมคลื่นไฟของขวาน หอกเหมาะเมื่อเน้นคริติคอลและตีบอสตัวเดิมได้นานพอให้พาสซีฟทำงานหลายรอบ สกิล Rhitta ของ The One ช่วยเพิ่มดาเมจและระยะเวลาของ Burn ให้ทีม",["Physical", "Blaze", "Buff"]],
- ["Flame (Burning Fist)",1,"Staff",["Great Axe Rhitta","Arcane Staff"],"Staff เพิ่มดาเมจเวท แนะนำ Great Axe Rhitta สำหรับเคลียร์เวฟ เพราะการทำดาเมจ Blaze หรือการติด Burn สะสม 30 ครั้งจะปล่อยคลื่นไฟรอบตัว ส่วน Arcane Staff เด่นตอนตีบอสจาก Double Cast หลังโจมตีบอสครั้งที่ 2",["Magic", "Blaze"]],
- ["Mely (Assault)",1,"Pistol","Inverted Spear","ร่าง Assault เป็น Physical / Dark จึงใส่ Inverted Spear ได้ เลือก Pistol เพื่อลดช่วงเวลาระหว่างการโจมตีและสะสมจำนวนครั้งให้พาสซีฟหอก ถ้ามี Rapier ที่สุ่มค่าลดช่วงห่างได้ใกล้กัน ใช้แทนได้ เพราะได้ดาเมจ Physical เพิ่มด้วย",["Physical", "Dark"]],
+ ["Flame (Burning Fist)", 1, "Staff", ["Great Axe Rhitta", "Arcane Staff"], "Staff เพิ่มดาเมจต่อครั้ง และ Burn ของ Flame Commander คิดจากดาเมจ Flame ส่วนโบนัสจากเพื่อน Blaze แบ่งให้ Flame ทุกตัวที่วาง เลือก Rhitta เมื่อมีศัตรูให้ลง Burn หลายตัว หรือ Arcane Staff เมื่อตีบอสต่อเนื่อง การย้าย Burn สูงสุด 25 สแต็กเกิดครั้งเดียวต่อบอส", ["Magic", "Blaze"]],
+ ["Mely (Assault)", 1, "Rapier", "Inverted Spear", "เมื่อค่า SPA ใกล้กัน Rapier ให้ทั้ง Physical Damage และรอบโจมตีที่สั้นลง โคลนตีด้วยดาเมจ 25% และมี SPA เป็นสองเท่าของ Mely เมื่อครบ 5 โคลน Mely รับประกันคริทุกครั้ง จึงเลือก Inverted Spear จากค่า Crit Damage เป็นหลัก โคลนเกิดจากท่าใหม่หรือ Full Counter การตีปกติถี่ขึ้นไม่ได้เรียกโคลนโดยตรง", ["Physical", "Dark"]],
  ["Higuru (Judgement)",1,["Sword","Pistol"],"Inverted Spear","ร่าง Judgement มีประเภท Physical จึงใส่ Inverted Spear ได้ เลือก Sword เพิ่มดาเมจต่อครั้ง ส่วน Pistol ลดช่วงห่างการโจมตี ทำให้มีโอกาสติดคริติคอลเพื่อรีเฟรชดีบัฟ Light บนบอสบ่อยขึ้น Rapier เป็นอีกทางที่ได้ทั้งดาเมจ Physical และความเร็วโจมตี",["Physical","Light"]],
  ["Barusu (From Zero)",1,["Staff","Slingshot"],"Arcane Staff","Staff เพิ่มดาเมจเวทต่อครั้ง ส่วน Arcane Staff ช่วยใช้ท่าโจมตีซ้ำ ในด่านยาว Return by Death เพิ่มระยะให้เพื่อนในวงของ Barusu ได้ จึงสลับ Slingshot เมื่อจำเป็นต้องให้บัฟถึงเพื่อนที่อยู่ไกล",["Magic","Dark","Buff"]],
  ["Berserk (BEAST OF RAGE)",1,"Greatsword","Inverted Spear","Greatsword เสริมดาเมจ Physical ต่อครั้ง ส่วน Inverted Spear เพิ่มความแรงคริติคอลให้การโจมตีที่ติดคริอยู่แล้ว เหมาะกับบทบาทตัวทำดาเมจสาย Bleed",["Physical","Blaze"]],
@@ -22,6 +34,12 @@ const units = [
  ["AI (Idol)",2,"เว้นช่องได้","เว้นช่องได้","เว้นทั้งสองช่องได้ AI บัฟดาเมจและ HP 15% ให้เพื่อนทุกตัวทั่วแมพ และลดค่าอัปเกรดของทุกยูนิต จึงไม่ต้องเพิ่ม Range ด้วย Slingshot ตัวละครไม่มีดาเมจโจมตีพื้นฐาน และใส่ Check ไม่ได้เพราะไม่ใช่ยูนิต Farm",["Magic", "Buff"]]
 ];
 const stageCaptions = {
+ "Zero (True Emperor)": {"Slingshot":{optional:true,caption:"เว้นได้หากระยะเดิมครอบคลุมตำแหน่งที่ต้องการ"}},
+ "Falcon (Wings of Light)": {"Slingshot":{optional:true,caption:"ใช้เฉพาะเมื่อต้องขยายวงส่วนลดให้ Berserk"}},
+ "Jolin (Stone Fate)": {"Slingshot":{optional:true,caption:"เว้นได้หากระยะเดิมครอบคลุมตำแหน่งที่ต้องการ"}},
+ "Jootaru (The World)": {"Slingshot":{optional:true,caption:"เว้นได้หากระยะเดิมครอบคลุมตำแหน่งที่ต้องการ"}},
+ "Ayzen (Perfect)": {"Sacred Chalice of Fate":{optional:true,caption:"เว้นได้เมื่อใช้เพื่อสตันและดึงศัตรูบินลงพื้น"}, "Slingshot":{optional:true,caption:"เว้นได้หากระยะเดิมครอบคลุมตำแหน่งที่ต้องการ"}},
+
  "Mastermind": {"Slingshot":{optional:true, caption:"ถ้าบัฟระยะถึงตัวโจมตีครบแล้ว"}},
  "Music (Artist)": {"Slingshot":{optional:true, caption:"ถ้าเพื่อนที่ต้องการบัฟเพลงอยู่ในวงครบแล้ว"}},
  "Barusu (From Zero)": {"Staff":"ใช้เป็นตัวทำดาเมจ", "Slingshot":"ด่านยาวที่ต้องขยายวงบัฟให้ถึงเพื่อน"},
