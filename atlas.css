@@ -40,3 +40,8 @@
 .tile small{font-size:12px;opacity:.85}
 .tile:disabled{opacity:.4;cursor:not-allowed}
 .empty-note{color:#b9b5ca}
+.preset-note{margin:0 0 12px;padding:10px 14px;border:1px solid #ae8742;border-radius:10px;background:#251f16;color:#e6dcc8;font-size:14px}
+.preset-note b{display:block;color:#ffdc80;margin-bottom:2px}
+.preset-note[hidden]{display:none}
+.preset-note ul{margin:6px 0 0;padding-left:20px}
+.preset-note li{margin:2px 0}

@@ -12,6 +12,7 @@ const dealsDamage = name => !NO_ATTACK.includes(name);
 const BURN_PARTNERS = ["Flame (Burning Fist)"];
 const CONTROL = {"Puci (Made in Heaven)": "สตันทุกครั้งที่โจมตี", "Beyond Heaven": "Time Stop สตัน และสโลว์"};
 const presets = [
+ ["★ ทีมไปได้ทุกที่", ["Goju VS Sukuno", "Beyond Heaven", "Flame (Burning Fist)", "Puci (Made in Heaven)", "AI (Idol)", "Speedcart"], "จัดจากยูนิต S Tier ที่แต่ละตัวมีหน้าที่ไม่ซ้ำกัน · Goju ทำดาเมจวงกว้างและตีตัวบินได้ · Beyond Heaven ทำ True Damage ทะลุโล่และค่าต้านทาน พร้อม Time Stop ทั่วแมพ · Flame วางได้ตั้งแต่ ¥500 ช่วยเปิดเกมและได้บัฟ Burn จากทั้ง Goju (Cursed) และ Eskanoor · Puci สตันทุกครั้งที่โจมตีและเด่นตอนตีบอส · AI บัฟดาเมจและ HP ทั่วแมพ และลดค่าอัปเกรด · Speedcart เป็นตัวฟาร์มที่ใช้ได้ทุกโหมด · เลี่ยง Sun God เพราะ Toon World จะล้างสตันของ Puci และ Beyond Heaven · ประเมินจากความสามารถของยูนิต ยังไม่ได้ลองเล่นจริงทุกด่าน"],
  ["ทีม Burn", ["Flame (Burning Fist)", "Akuzo VS Renkuro", "Goju VS Sukuno", "Mr. Champion", "Speedcart", "Loid"]],
  ["ทีม Magic", ["Einz (Sorcerer King)", "Goju VS Sukuno", "Barusu (From Zero)", "Useless Goddess", "AI (Idol)", "Speedcart"]],
  ["ทีม Physical", ["Mely (Assault)", "Higuru (Judgement)", "Berserk (BEAST OF RAGE)", "Mr. Champion", "Mastermind", "Speedcart"]],
@@ -52,6 +53,15 @@ function renderBoard() {
  const counts = {};
  [HERO, ...team].forEach(name => byName[name][5].forEach(tag => counts[tag] = (counts[tag] || 0) + 1));
  document.querySelector("#mix").innerHTML = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([tag, count]) => `<span class="type-tag" lang="en">${tag} ×${count}</span>`).join("");
+}
+
+function renderPresetNote() {
+ const match = presets.find(([, names]) => names.length === team.length && names.every(name => team.includes(name)));
+ const note = document.querySelector("#preset-note");
+ note.hidden = !match?.[2];
+ const [intro, ...points] = match?.[2] ? match[2].split(" · ") : [];
+ note.innerHTML = intro ? `<b>${match[0]}</b>${intro}<ul>${points.map(point => `<li>${point}</li>`).join("")}</ul>` : "";
+ document.querySelectorAll("[data-preset]").forEach(button => button.setAttribute("aria-pressed", String(presets[button.dataset.preset] === match)));
 }
 
 function list(names) {
@@ -146,6 +156,7 @@ function render() {
  renderBoard();
  renderChecks();
  renderRoster();
+ renderPresetNote();
  document.querySelector("#share-url").hidden = true;
  document.querySelector("#share-status").textContent = "";
 }
