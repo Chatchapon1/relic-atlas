@@ -13,6 +13,7 @@ const BURN_PARTNERS = ["Flame (Burning Fist)"];
 const CONTROL = {"Puci (Made in Heaven)": "สตันทุกครั้งที่โจมตี", "Beyond Heaven": "Time Stop สตัน และสโลว์"};
 const presets = [
  ["★ ทีมไปได้ทุกที่", ["Goju VS Sukuno", "Beyond Heaven", "Flame (Burning Fist)", "Puci (Made in Heaven)", "AI (Idol)", "Speedcart"], "จัดจากยูนิต S Tier ที่แต่ละตัวมีหน้าที่ไม่ซ้ำกัน · Goju ทำดาเมจวงกว้างและตีตัวบินได้ · Beyond Heaven ทำ True Damage ทะลุโล่และค่าต้านทาน พร้อม Time Stop ทั่วแมพ · Flame วางได้ตั้งแต่ ¥500 ช่วยเปิดเกมและได้บัฟ Burn จากทั้ง Goju (Cursed) และ Eskanoor · Puci สตันทุกครั้งที่โจมตีและเด่นตอนตีบอส · AI บัฟดาเมจและ HP ทั่วแมพ และลดค่าอัปเกรด · Speedcart เป็นตัวฟาร์มที่ใช้ได้ทุกโหมด · เลี่ยง Sun God เพราะ Toon World จะล้างสตันของ Puci และ Beyond Heaven · ประเมินจากความสามารถของยูนิต ยังไม่ได้ลองเล่นจริงทุกด่าน"],
+ ["★ ทุกที่ (ฟาร์ม 2)", ["Goju VS Sukuno", "Beyond Heaven", "Flame (Burning Fist)", "AI (Idol)", "Speedcart", "Loid"], "ทีมไปได้ทุกที่แบบเน้นเงิน สำหรับด่านยากหรือด่านยาวที่ต้องรีบอัปตัวแพงอย่าง Goju · แลก Puci เป็น Loid ทำให้มีตัวฟาร์ม 2 ตัว ใส่ Check ทั้งคู่แล้วเงินตั้งต้นรวมกัน · Loid ทำเงินรวมได้มากกว่า Speedcart แต่อัปแพงกว่า · เสียสตันของ Puci แต่ยังมี Time Stop ของ Beyond Heaven ช่วยคุมศัตรู · Flame ยังช่วยเปิดเกมและได้บัฟ Burn จาก Goju (Cursed) กับ Eskanoor ครบ · ด่านสั้นหรือด่านง่าย ใช้ทีมไปได้ทุกที่แบบปกติจะคุมศัตรูได้ดีกว่า"],
  ["ทีม Burn", ["Flame (Burning Fist)", "Akuzo VS Renkuro", "Goju VS Sukuno", "Mr. Champion", "Speedcart", "Loid"]],
  ["ทีม Magic", ["Einz (Sorcerer King)", "Goju VS Sukuno", "Barusu (From Zero)", "Useless Goddess", "AI (Idol)", "Speedcart"]],
  ["ทีม Physical", ["Mely (Assault)", "Higuru (Judgement)", "Berserk (BEAST OF RAGE)", "Mr. Champion", "Mastermind", "Speedcart"]],
@@ -81,7 +82,9 @@ function analyse() {
  }
 
  const farms = team.filter(name => FARM.includes(name));
- if (farms.length) add("ok", `ตัวฟาร์ม ${farms.length} ตัว`, `${list(farms)} ใส่ Check ทุกตัว เงินตั้งต้นจากยูนิตฟาร์มรวมกันได้`);
+ if (farms.length === 1 && farms[0] === "Speedcart") add("ok", "ตัวฟาร์ม 1 ช่อง", "Speedcart ช่องเดียววางได้หลายจุด วางถูกและอัปเต็มได้ไว ส่วนใหญ่จึงพอ แต่ได้เงินตั้งต้นจาก Check ชิ้นเดียว ถ้าด่านยากหรือต้องรีบอัปตัวแพง ลองเพิ่ม Loid");
+ else if (farms.length === 1) add("ok", "ตัวฟาร์ม 1 ช่อง", "Loid ทำเงินรวมได้มาก แต่อัปแพงและขายไม่ได้ ถ้าเงินช่วงต้นตึง ลองเพิ่ม Speedcart ที่วางถูกกว่า");
+ else if (farms.length) add("ok", `ตัวฟาร์ม ${farms.length} ตัว`, `${list(farms)} ใส่ Check ทุกตัว เงินตั้งต้นจากยูนิตฟาร์มรวมกันได้`);
  else if (inTeam("AI (Idol)")) add("info", "ไม่มียูนิตฟาร์ม", "AI (Idol) ช่วยลดค่าอัปเกรด แต่ไม่ได้สร้างเงินเพิ่ม ถ้าด่านยาวลองใส่ Speedcart หรือ Loid");
  else add("warn", "ไม่มียูนิตฟาร์ม", "เงินจะมาจากการเคลียร์เวฟอย่างเดียว ลองใส่ Speedcart (วางถูก) หรือ Loid (เงินรวมมากกว่าแต่อัปเกรดแพง)");
 
